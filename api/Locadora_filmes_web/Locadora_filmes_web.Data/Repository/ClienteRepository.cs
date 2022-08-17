@@ -1,4 +1,5 @@
 ﻿using Locadora_filmes_web.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,22 +16,38 @@ namespace Locadora_filmes_web.Data.Repository
 
         public void Alterar(int id, Cliente entity)
         {
-            throw new System.NotImplementedException();
+            var cliente = ObterPorId(id);
+            cliente.Nome = entity.Nome;
+            cliente.Cpf = entity.Cpf;
+            cliente.DataNascimento = entity.DataNascimento;
+
+            _dbContextClient.SaveChanges();
         }
 
-        public void Exclusao(int id)
+        public void Excluir(int id)
         {
-            throw new System.NotImplementedException();
+            var cliente = ObterPorId(id);
+
+            _dbContextClient.Cliente.Remove(cliente);
+            _dbContextClient.SaveChanges();
         }
 
         public int Incluir(Cliente entity)
         {
-            throw new System.NotImplementedException();
+            _dbContextClient.Cliente.Add(entity);
+            _dbContextClient.SaveChanges();
+
+            return entity.Id;
         }
 
         public Cliente ObterPorId(int id)
         {
-            throw new System.NotImplementedException();
+            var cliente = _dbContextClient.Cliente.FirstOrDefault(x => x.Id.Equals(id));
+
+            if (cliente is null)
+                throw new ArgumentException($"Cliente {id} não foi encontrado.");
+
+            return cliente;
         }
 
         public List<Cliente> ObterTodos() =>

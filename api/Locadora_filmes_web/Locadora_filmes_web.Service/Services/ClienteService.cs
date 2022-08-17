@@ -15,24 +15,21 @@ namespace Locadora_filmes_web.Service.Services
 
         public void Alterar(int id, Cliente entidade)
         {
-            throw new System.NotImplementedException();
+            _clienteRepository.Alterar(id, entidade);
         }
 
-        public void Exclusao(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Excluir(int id) =>
+            _clienteRepository.Excluir(id);
 
         public int Incluir(Cliente entidade)
         {
-            throw new System.NotImplementedException();
+            return _clienteRepository.Incluir(entidade);
         }
 
-        public List<Cliente> ObterTodos() => _clienteRepository.ObterTodos();
+        public List<Cliente> ObterTodos() => 
+            _clienteRepository.ObterTodos();
 
-        public Cliente ObterPorId(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Cliente ObterPorId(int id) =>
+            _clienteRepository.ObterPorId(id);
     }
 }

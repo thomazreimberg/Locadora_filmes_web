@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\Locadora_filmes_web.Data\Locadora_filmes_web.Data.csproj" />
   </ItemGroup>
 
 </Project>

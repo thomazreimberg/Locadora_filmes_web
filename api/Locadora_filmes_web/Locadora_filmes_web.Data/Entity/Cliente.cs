@@ -21,6 +21,6 @@ namespace Locadora_filmes_web.Data.Entity
         /// Data de nascimento do cliente.
         /// </summary>
         [Column(TypeName = "datetime")]
-        public DateTime DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
     }
 }

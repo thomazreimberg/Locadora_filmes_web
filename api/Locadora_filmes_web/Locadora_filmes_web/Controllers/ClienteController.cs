@@ -16,7 +16,6 @@ namespace Locadora_filmes_web.Controllers
         /// <summary>
         /// Construtor da classe.
         /// </summary>
-        /// <param name="clienteService">Interface que implementa as funções para as rotas de cor.</param>
         public ClienteController()
         {
             _clienteService = new ClienteService();
@@ -31,33 +30,37 @@ namespace Locadora_filmes_web.Controllers
             Ok(_clienteService.ObterTodos());
 
         /// <summary>-
-        /// Consulta de cor por ID.
+        /// Consulta de cliente por ID.
         /// </summary>
-        /// <param name="id">Id da cor.</param>
-        /// <returns>200: cor referente ao ID informado; 400</returns>
+        /// <param name="id">Id do cliente.</param>
+        /// <returns>200: Cliente referente ao ID informado; 400</returns>
         [HttpGet("{id}")]
         public ActionResult<ClienteDtoConsulta> ObterPorId(int id) =>
             Ok(_clienteService.ObterPorId(id));
 
         /// <summary>
-        /// Cadastro de cor.
+        /// Cadastro de cliente.
         /// </summary>
-        /// <param name="cliente">Dados da cor para cadastro.</param>
-        /// <returns>200: Id da nova cor; 400: Mensagem de validação.</returns>
+        /// <param name="cliente">Dados do cliente para cadastro.</param>
+        /// <returns>200: Id do novo clientes; 400: Mensagem de validação.</returns>
         [HttpPost]
         public ActionResult<RetornoInclusaoRegistroDto> Incluir([FromBody] ClienteDto cliente) =>
-            Ok(_clienteService.Incluir(new Cliente()
-            { 
-                Nome = cliente.Nome,
-                Cpf = cliente.Cpf,
-                DataNascimento = cliente.DataNascimento
-            }));
+            Ok(new RetornoInclusaoRegistroDto()
+            {
+                Id = _clienteService.Incluir(
+                new Cliente()
+                {
+                    Nome = cliente.Nome,
+                    Cpf = cliente.Cpf,
+                    DataNascimento = cliente.DataNascimento
+                })
+            });
 
         /// <summary>
-        /// Alteração no cadastro de cor.
+        /// Alteração no cadastro de cliente.
         /// </summary>
-        /// <param name="id">Id da cor a ser alterada.</param>
-        /// <param name="cliente">Novos dados da cor.</param>
+        /// <param name="id">Id do clientes a ser alterado.</param>
+        /// <param name="cliente">Novos dados do clientes.</param>
         /// <returns>200; 400: Mensagem de validação.</returns>
         [HttpPut("{id}")]
         public ActionResult Alterar(int id, [FromBody] ClienteDto cliente)
@@ -72,6 +75,9 @@ namespace Locadora_filmes_web.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Exclui clientes.
+        /// </summary>
         [HttpDelete("{id}")]
         public ActionResult Excluir(int id)
         {

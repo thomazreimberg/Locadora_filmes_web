@@ -18,6 +18,7 @@ namespace Locadora_filmes_web.Data
         #region Tabelas
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Filme> Filme { get; set; }
+        public DbSet<Locacao> Locacao { get; set; }
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

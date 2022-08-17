@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Locadora_filmes_web.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Locadora_filmes_web.Data
 {
@@ -10,8 +11,14 @@ namespace Locadora_filmes_web.Data
 
         public DbContextClient()
         {
-            _stringConexaoBd = "server=localhost;database=Locadora_filmes_web;uid=root;password=spypreto";
+            // Estrutura feita dessa forma para fins demonstrativos.
+            _stringConexaoBd = "server=127.0.0.1;port=3366;database=Locadora_filmes_web;uid=root;password=spypreto";
         }
+
+        #region Tabelas
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Filme> Filme { get; set; }
+        #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,12 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.4.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Locadora_filmes_web.Data\Locadora_filmes_web.Data.csproj" />
     <ProjectReference Include="..\Locadora_filmes_web.Service\Locadora_filmes_web.Service.csproj" />
+    <ProjectReference Include="..\Locadora_filmes_web\Locadora_filmes_web.csproj" />
   </ItemGroup>
 
 </Project>

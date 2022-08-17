@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locadora_filmes_web", "Locadora_filmes_web\Locadora_filmes_web.csproj", "{502E9A4B-851A-40A2-A993-1069B3CC5507}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora_filmes_web.Service", "Locadora_filmes_web.Service\Locadora_filmes_web.Service.csproj", "{0CF1770E-B7C3-4B90-B2E1-2192F00714C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locadora_filmes_web.Service", "Locadora_filmes_web.Service\Locadora_filmes_web.Service.csproj", "{0CF1770E-B7C3-4B90-B2E1-2192F00714C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora_filmes_web.Data", "Locadora_filmes_web.Data\Locadora_filmes_web.Data.csproj", "{474396BD-A1C1-4253-BC95-60CA1ECB5556}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Locadora_filmes_web.Data", "Locadora_filmes_web.Data\Locadora_filmes_web.Data.csproj", "{474396BD-A1C1-4253-BC95-60CA1ECB5556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

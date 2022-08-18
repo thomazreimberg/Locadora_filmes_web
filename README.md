@@ -31,6 +31,7 @@
 - Docker-Compose: Only one usage of each socket address (protocol/network address/port) is normally permitted: https://stackoverflow.com/questions/64307077/docker-compose-only-one-usage-of-each-socket-address-protocol-network-address
 - Utilizando MySQL com Docker: https://www.youtube.com/watch?v=1Zpr1vX0wqk
 - https://stackoverflow.com/questions/64307077/docker-compose-only-one-usage-of-each-socket-address-protocol-network-address
+- https://stackoverflow.com/questions/2148746/the-operator-is-reserved-for-future-use
 	
 ### React:
 - https://ant.design/docs/react/getting-started

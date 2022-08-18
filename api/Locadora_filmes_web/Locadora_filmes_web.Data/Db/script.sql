@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Filme (
 
 
 CREATE TABLE IF NOT EXISTS Locacao (
-  Id INT NOT NULL,
+  Id INT NOT NULL AUTO_INCREMENT,
   Id_cliente INT NULL,
   Id_filme INT NULL,
   DataLocacao DATETIME NULL,
@@ -38,8 +38,8 @@ CREATE TABLE IF NOT EXISTS Locacao (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-INSERT INTO Cliente (Nome, Cpf, DataNascimento) VALUES ('Thomaz', '', (curdate()));
-INSERT INTO Cliente (Nome, Cpf, DataNascimento) VALUES ('Henrique', '', (curdate() - INTERVAL 5 year));
+INSERT INTO Cliente (Nome, Cpf, DataNascimento) VALUES ('Thomaz', '67621573007', (curdate()));
+INSERT INTO Cliente (Nome, Cpf, DataNascimento) VALUES ('Henrique', '96572293084', (curdate() - INTERVAL 18 year));
 
 INSERT INTO Filme (Titulo, ClassificacaoIndicada, Lancamento) VALUES ('Como treinar o seu dragão.', 1, true);
 INSERT INTO Filme (Titulo, ClassificacaoIndicada, Lancamento) VALUES ('Vingadores', 1, true);

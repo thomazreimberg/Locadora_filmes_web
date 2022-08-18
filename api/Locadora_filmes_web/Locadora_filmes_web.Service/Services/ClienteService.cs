@@ -44,9 +44,6 @@ namespace Locadora_filmes_web.Service.Services
 
             if (string.IsNullOrWhiteSpace(entidade.Cpf))
                 throw new ArgumentException("Cpf do cliente não foi informado.");
-
-            if (entidade.DataNascimento is null)
-                throw new ArgumentException("Data de nascimento do cliente não foi informada.");
         }
     }
 }

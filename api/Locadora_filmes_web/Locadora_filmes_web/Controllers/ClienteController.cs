@@ -2,6 +2,7 @@
 using Locadora_filmes_web.Dtos;
 using Locadora_filmes_web.Dtos.Cliente;
 using Locadora_filmes_web.Service.Services;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 

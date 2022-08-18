@@ -41,10 +41,14 @@ namespace Locadora_filmes_web
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
+
+            app.UseCors(cors => cors
+               .AllowAnyMethod()
+               .AllowAnyHeader()
+               .AllowAnyOrigin()
+           );
 
             app.UseEndpoints(endpoints =>
             {

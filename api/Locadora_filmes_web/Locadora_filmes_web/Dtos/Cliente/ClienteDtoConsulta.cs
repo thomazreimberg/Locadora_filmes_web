@@ -2,6 +2,6 @@
 {
     public class ClienteDtoConsulta : ClienteDto
     {
-        public int Id { get; set; }
+        public int Key { get; set; }
     }
 }

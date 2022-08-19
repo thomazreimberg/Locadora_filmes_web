@@ -27,7 +27,7 @@ namespace Locadora_filmes_web.Controllers
         /// <returns>200: Lista de filmes. 400</returns>
         [HttpGet]
         public ActionResult<List<FilmeDtoConsulta>> ObterTodos() =>
-            Ok(_filmeService.ObterTodos());
+            Ok(ConvertModel(_filmeService.ObterTodos()));
 
         /// <summary>-
         /// Consulta de filme por ID.
@@ -81,6 +81,23 @@ namespace Locadora_filmes_web.Controllers
         {
             _filmeService.Excluir(id);
             return Ok();
+        }
+
+        private List<FilmeDtoConsulta> ConvertModel(List<Filme> filmes)
+        {
+            var filmesDto = new List<FilmeDtoConsulta>();
+            foreach (var item in filmes)
+            {
+                filmesDto.Add(new FilmeDtoConsulta()
+                {
+                    Key = item.Id,
+                    Titulo = item.Titulo,
+                    Lancamento = item.Lancamento,
+                    ClassificacaoIndicada = item.ClassificacaoIndicada,
+                });
+            }
+
+            return filmesDto;
         }
     }
 }

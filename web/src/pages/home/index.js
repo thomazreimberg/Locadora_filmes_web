@@ -8,7 +8,10 @@ import { Breadcrumb, Layout, Menu } from 'antd';
 
 import './styles.css';
 import React, { useState } from 'react';
-import ClientSelect from '../../containers/client/ClientSelect'
+import GetClient from '../../containers/client/GetClient'
+import GetMovie from '../../containers/movie/GetMovie'
+import GetMovieRental from '../../containers/movieRental/GetMovieRental'
+import PostClient from '../../containers/client/PostClient';
 
 const { Header, Content, Sider } = Layout;
 
@@ -22,14 +25,31 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Home', '1', <PieChartOutlined />),
-  getItem('Alugar filmes', '2', <ShoppingOutlined />),
-  getItem('Filme', '3', <DesktopOutlined />),
-  getItem('Cliente', '4', <UserOutlined />),
+  getItem('Home', 'homeChild', <PieChartOutlined />),
+  getItem('Alugar filmes', 'movieRental', <ShoppingOutlined />),
+  getItem('Filme', 'movie', <DesktopOutlined />),
+  getItem('Cliente', 'client', <UserOutlined />),
 ];
 
 export default function App() {
   const [collapsed, setCollapsed] = useState(false);
+  const initial = {
+    homeChild: false,
+    client: false,
+    movie: false,
+    movieRental: false,
+    postClient: false,
+  }
+  const [menuControl, setmenuControl] = useState(initial)
+
+  const handleControl = (val, option) => {
+    if(option === "parent"){
+      setmenuControl({ ...initial, [val.key]: !initial[val.key] });
+    } else if(option === "child"){
+      setmenuControl({ ...initial, [val.target.name]: !initial[val.target.name] });
+    }
+  }
+
   return (
     <Layout
       style={{
@@ -38,7 +58,7 @@ export default function App() {
     >
       <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu className="site-layout-menu" theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} onClick={(e)=> handleControl(e, "parent")} />
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" />
@@ -52,10 +72,19 @@ export default function App() {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>Nome da opção que selecionei atualmente.</Breadcrumb.Item>
+            <Breadcrumb.Item>Some options</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
-            <ClientSelect />
+            {menuControl.client ?
+              <GetClient  addFunc={handleControl} /> :
+              menuControl.postClient ?
+                <PostClient /> :
+                menuControl.movieRental ?
+                  <GetMovieRental /> : 
+                  menuControl.movie ?
+                  <GetMovie />:
+                  <p>Home</p>
+            }
           </div>
         </Content>
       </Layout>

@@ -6,22 +6,27 @@ import './styles.css'
 import api from '../../services/api';
 
 const { Column } = Table;
-export default function ClientSelect() {
+export default function GetClient({addFunc}) {
+
   const [clients, setClients] = useState([]);
-
+  const fetchData = async () => {
+    try {
+      const res = await api.get('api/Cliente');
+      setClients(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
-    api.get('api/Cliente')
-    .then(response => {
-      setClients(response.data);
-    })
-  });
-
+    fetchData();
+  },[]);
+  
   return (
     <div>
-      <Button className='clientSelect-button' type="primary">Cadastrar cliente</Button>
+      <Button name="postClient" onClick={(e)=> addFunc(e, "child")} className='get-client-button' type="primary" >Cadastrar cliente</Button>
 
       <Table dataSource={clients}>
-        <Column title="Nome" dataIndex="Nome" key="Nome" />
+        <Column title="Nome" dataIndex="nome" key="nome" />
         <Column title="CPF" dataIndex="cpf" key="cpf" />
         <Column title="Data de nascimento" dataIndex="dataNascimento" key="dataNascimento" />
         <Column

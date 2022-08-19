@@ -13,6 +13,7 @@ namespace Locadora_filmes_web.Controllers
     {
         private LocacaoService _locacaoService { get; set; }
         private FilmeService _filmeService { get; set; }
+        private ClienteService _clienteService { get; set; }
 
         /// <summary>
         /// Construtor da classe.
@@ -21,6 +22,7 @@ namespace Locadora_filmes_web.Controllers
         {
             _locacaoService = new LocacaoService();
             _filmeService = new FilmeService();
+            _clienteService = new ClienteService();
         }
 
         /// <summary>
@@ -95,14 +97,19 @@ namespace Locadora_filmes_web.Controllers
 
             foreach (var item in locacoes)
             {
+                var filme = _filmeService.ObterPorId(item.Id_Filme);
+                var cliente = _clienteService.ObterPorId(item.Id_Cliente);
+
                 locacoesDto.Add(new LocacaoDtoConsulta()
                 {
-                    Id = item.Id,
+                    Key = item.Id,
                     Id_Filme = item.Id_Filme,
+                    Filme = filme.Titulo,
                     Id_Cliente = item.Id_Cliente,
+                    Cliente = cliente.Nome,
                     DataLocacao = item.DataLocacao,
                     DataDevolucao = item.DataDevolucao,
-                    DataPrevisaoDevolucao = _filmeService.ObterPorId(item.Id_Filme).Lancamento ? item.DataLocacao?.AddDays(2) : item.DataLocacao?.AddDays(3)
+                    DataPrevisaoDevolucao = filme.Lancamento ? item.DataLocacao?.AddDays(2) : item.DataLocacao?.AddDays(3)
                 });
             }
 

@@ -28,7 +28,7 @@ namespace Locadora_filmes_web.Controllers
         /// <returns>200: Lista de clientes. 400</returns>
         [HttpGet]
         public ActionResult<List<ClienteDtoConsulta>> ObterTodos() =>
-            Ok(_clienteService.ObterTodos());
+            Ok(ConvertModel(_clienteService.ObterTodos()));
 
         /// <summary>-
         /// Consulta de cliente por ID.
@@ -67,10 +67,10 @@ namespace Locadora_filmes_web.Controllers
         public ActionResult Alterar(int id, [FromBody] ClienteDto cliente)
         {
             _clienteService.Alterar(id, new Cliente()
-            { 
+            {
                 Nome = cliente.Nome,
                 Cpf = cliente.Cpf,
-                DataNascimento = cliente.DataNascimento
+                DataNascimento = cliente.DataNascimento.Date
             });
 
             return Ok();
@@ -84,6 +84,23 @@ namespace Locadora_filmes_web.Controllers
         {
             _clienteService.Excluir(id);
             return Ok();
+        }
+
+        private List<ClienteDtoConsulta> ConvertModel(List<Cliente> clientes)
+        {
+            var clienteDto = new List<ClienteDtoConsulta>();
+            foreach (var item in clientes)
+            {
+                clienteDto.Add(new ClienteDtoConsulta() 
+                { 
+                    Key = item.Id,
+                    Nome = item.Nome,
+                    Cpf = item.Cpf,
+                    DataNascimento = item.DataNascimento,
+                });
+            }
+
+            return clienteDto;
         }
     }
 }

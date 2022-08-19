@@ -2,6 +2,6 @@
 {
     public class FilmeDtoConsulta : FilmeDto
     {
-        public int Id { get; set; }
+        public int Key { get; set; }
     }
 }

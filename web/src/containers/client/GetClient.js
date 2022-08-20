@@ -23,7 +23,7 @@ export default function GetClient({addFunc}) {
   
   return (
     <div>
-      <Button name="postClient" onClick={(e)=> addFunc(e, "child")} className='get-client-button' type="primary" >Cadastrar cliente</Button>
+      <Button name="postClient" onClick={(e)=> addFunc("postClient", "child")} className='get-client-button' type="primary" >Cadastrar cliente</Button>
 
       <Table dataSource={clients}>
         <Column title="Nome" dataIndex="nome" key="nome" />

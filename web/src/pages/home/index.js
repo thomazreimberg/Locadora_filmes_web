@@ -12,6 +12,7 @@ import GetClient from '../../containers/client/GetClient'
 import GetMovie from '../../containers/movie/GetMovie'
 import GetMovieRental from '../../containers/movieRental/GetMovieRental'
 import PostClient from '../../containers/client/PostClient';
+import PostMovie from '../../containers/movie/PostMovie';
 
 const { Header, Content, Sider } = Layout;
 
@@ -39,15 +40,20 @@ export default function App() {
     movie: false,
     movieRental: false,
     postClient: false,
+    postMovie: false,
   }
   const [menuControl, setmenuControl] = useState(initial)
 
   const handleControl = (val, option) => {
     if(option === "parent"){
       setmenuControl({ ...initial, [val.key]: !initial[val.key] });
-    } else if(option === "child"){
-      setmenuControl({ ...initial, [val.target.name]: !initial[val.target.name] });
+    } else { //if(option === "child")
+      setmenuControl({ ...initial, [val]: !initial[val] });
     }
+
+    // console.log(menuControl);
+    // console.log(val.key);
+    // console.log(option);
   }
 
   return (
@@ -70,9 +76,10 @@ export default function App() {
           <Breadcrumb
             style={{
               margin: '16px 0',
+              fontSize: '16px 0'
             }}
           >
-            <Breadcrumb.Item>Some options</Breadcrumb.Item>
+            <Breadcrumb.Item>Locadora React</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
             {menuControl.client ?
@@ -82,7 +89,9 @@ export default function App() {
                 menuControl.movieRental ?
                   <GetMovieRental /> : 
                   menuControl.movie ?
-                  <GetMovie />:
+                  <GetMovie addFunc={handleControl} />:
+                  menuControl.postMovie ?
+                  <PostMovie />:
                   <p>Home</p>
             }
           </div>

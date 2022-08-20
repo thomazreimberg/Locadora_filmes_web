@@ -1,9 +1,20 @@
 import { Space, Table, Button } from 'antd';
 import React, { useState, useEffect } from 'react';
-
 import './styles.css'
 
 import api from '../../services/api';
+import PopUpSucess from '../popup/PopUpSucess';
+
+async function DeleteClient(key){
+  try {
+      await api.delete('api/Cliente/'+ key);
+      <PopUpSucess title="Cliente" description="Cliente deletado com sucesso"/>
+
+      window.location.reload(false);
+  } catch(err){
+      console.log('Erro ao deletar um cliente, tente novamente.');
+  }
+}
 
 const { Column } = Table;
 export default function GetClient({addFunc}) {
@@ -20,7 +31,7 @@ export default function GetClient({addFunc}) {
   useEffect(() => {
     fetchData();
   },[]);
-  
+   
   return (
     <div>
       <Button name="postClient" onClick={(e)=> addFunc("postClient", "child")} className='get-client-button' type="primary" >Cadastrar cliente</Button>
@@ -32,10 +43,11 @@ export default function GetClient({addFunc}) {
         <Column
           title="Action"
           key="action"
-          render={() => (
+          dataIndex="key"
+          render={(e, record) => (
             <Space size="middle">
-              <a>Alterar</a>
-              <a>Excluir</a>
+              <Button onClick={()=> console.log(record.key)}>Alterar</Button>
+              <Button onClick={()=> DeleteClient(record.key)}>Excluir</Button>
             </Space>
           )}
         />

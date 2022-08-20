@@ -4,6 +4,18 @@ import React, { useState, useEffect } from 'react';
 import './styles.css'
 
 import api from '../../services/api';
+import PopUpSucess from '../popup/PopUpSucess';
+
+async function DeleteMovie(key){
+  try {
+      await api.delete('api/Filme/'+ key);
+      <PopUpSucess title="Filme" description="Filme deletado com sucesso!"/>
+
+      window.location.reload(false);
+  } catch(err){
+      console.log('Erro ao deletar um cliente, tente novamente.');
+  }
+}
 
 const { Column } = Table;
 export default function GetMovie({addFunc}) {
@@ -31,10 +43,10 @@ export default function GetMovie({addFunc}) {
         <Column
           title="Action"
           key="action"
-          render={() => (
+          render={(e, record) => (
             <Space size="middle">
-              <a>Alterar</a>
-              <a>Excluir</a>
+              <Button onClick={()=> console.log(record.key)}>Alterar</Button>
+              <Button onClick={()=> DeleteMovie(record.key)}>Excluir</Button>
             </Space>
           )}
         />

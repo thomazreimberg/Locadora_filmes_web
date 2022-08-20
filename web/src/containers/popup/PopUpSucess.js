@@ -4,8 +4,8 @@ import React from 'react';
 
 export default function PopUpSucess(title, description) {
   notification.success({
-    message: title + "",
-    description: description + "!",
+    message: title,
+    description: description,
     icon: (
       <CheckCircleOutlined
         style={{

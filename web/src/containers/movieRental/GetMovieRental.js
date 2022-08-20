@@ -4,6 +4,18 @@ import React, { useState, useEffect } from 'react';
 import './styles.css'
 
 import api from '../../services/api';
+import PopUpSucess from '../popup/PopUpSucess';
+
+async function DeleteMovieRental(key){
+  try {
+      await api.delete('api/Locacao/'+ key);
+      <PopUpSucess title="Locação" description="Locação deletada com sucesso!"/>
+
+      window.location.reload(false);
+  } catch(err){
+      console.log('Erro ao deletar uma locação, tente novamente.');
+  }
+}
 
 const { Column } = Table;
 export default function GetMovieRental({addFunc}) {
@@ -35,10 +47,10 @@ export default function GetMovieRental({addFunc}) {
         <Column
           title="Action"
           key="action"
-          render={() => (
+          render={(e, record) => (
             <Space size="middle">
-              <a>Alterar</a>
-              <a>Excluir</a>
+              <Button onClick={()=> console.log(record.key)}>Alterar</Button>
+              <Button onClick={()=> DeleteMovieRental(record.key)}>Excluir</Button>
             </Space>
           )}
         />

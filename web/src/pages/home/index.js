@@ -76,7 +76,6 @@ export default function App() {
           <Breadcrumb
             style={{
               margin: '16px 0',
-              fontSize: '16px 0'
             }}
           >
             <Breadcrumb.Item>Locadora React</Breadcrumb.Item>

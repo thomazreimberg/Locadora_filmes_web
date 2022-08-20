@@ -14,9 +14,9 @@ import api from '../../services/api';
 import PopUpSucess from '../popup/PopUpSucess';
 
 export default function PostMovie() {
-    const [titulo, setTitulo] = useState();
-    const [classificacaoIndicada, setClassificacaoIndicada] = useState();
-    const [lancamento, setLancamento] = useState();
+    const [titulo, setTitulo] = useState("");
+    const [classificacaoIndicada, setClassificacaoIndicada] = useState(1);
+    const [lancamento, setLancamento] = useState(false);
 
     async function handleNewClient(e){
         e.preventDefault();
@@ -30,9 +30,7 @@ export default function PostMovie() {
         try {
             await api.post('api/Filme', data);
 
-            <PopUpSucess title="Filme" description="Filme cadastrado com sucesso"/>
-           
-            document.cookie = 'appname=movie';
+            <PopUpSucess title="Filme" description="Filme cadastrado com sucesso!"/>
 
             window.location.reload(false);
         } catch(err){
@@ -59,11 +57,11 @@ export default function PostMovie() {
             </Form.Item>
 
             <Form.Item label="Classificação indicada">
-                <InputNumber  style={{ width: 450}} maxLength={200} value={titulo} onChange={e => setClassificacaoIndicada(e.target.value)}/>
+                <InputNumber defaultValue={1} min={1} max={18} value={classificacaoIndicada} onChange={e => setClassificacaoIndicada(e)}/>
             </Form.Item>
             
             <Form.Item label="Lançamento">
-                <Checkbox style={{ width: 150}} value={lancamento} onChange={e => setLancamento(e.target.value)}/>
+                <Checkbox style={{ width: 150}} onClick={e => setLancamento(e.target.checked)}/>
             </Form.Item>
 
             <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-movie' type="primary" >Enviar</Button>

@@ -13,6 +13,7 @@ import GetMovie from '../../containers/movie/GetMovie'
 import GetMovieRental from '../../containers/movieRental/GetMovieRental'
 import PostClient from '../../containers/client/PostClient';
 import PostMovie from '../../containers/movie/PostMovie';
+import PostMovieRental from '../../containers/movieRental/PostMovieRental';
 
 const { Header, Content, Sider } = Layout;
 
@@ -41,19 +42,16 @@ export default function App() {
     movieRental: false,
     postClient: false,
     postMovie: false,
+    postMovieRental: false,
   }
   const [menuControl, setmenuControl] = useState(initial)
 
   const handleControl = (val, option) => {
     if(option === "parent"){
       setmenuControl({ ...initial, [val.key]: !initial[val.key] });
-    } else { //if(option === "child")
+    } else {
       setmenuControl({ ...initial, [val]: !initial[val] });
     }
-
-    // console.log(menuControl);
-    // console.log(val.key);
-    // console.log(option);
   }
 
   return (
@@ -81,18 +79,21 @@ export default function App() {
             <Breadcrumb.Item>Locadora React</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background">
-            {menuControl.client ?
-              <GetClient  addFunc={handleControl} /> :
-              menuControl.postClient ?
-                <PostClient /> :
-                menuControl.movieRental ?
-                  <GetMovieRental /> : 
-                  menuControl.movie ?
-                  <GetMovie addFunc={handleControl} />:
-                  menuControl.postMovie ?
-                  <PostMovie />:
-                  <p>Home</p>
-            }
+            {
+              menuControl.client ?
+                <GetClient  addFunc={handleControl} /> :
+                  menuControl.postClient ?
+                    <PostClient /> :
+                      menuControl.movieRental ?
+                        <GetMovieRental addFunc={handleControl} /> : 
+                          menuControl.postMovieRental ?
+                            <PostMovieRental /> : 
+                              menuControl.movie ?
+                                <GetMovie addFunc={handleControl} />:
+                                  menuControl.postMovie ?
+                                    <PostMovie />:
+                                      <p>Home</p>
+              }
           </div>
         </Content>
       </Layout>

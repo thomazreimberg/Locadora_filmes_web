@@ -29,6 +29,14 @@ namespace Locadora_filmes_web.Controllers
         public ActionResult<List<FilmeDtoConsulta>> ObterTodos() =>
             Ok(ConvertModel(_filmeService.ObterTodos()));
 
+        /// <summary>
+        /// Listagem de filmes por descrição.
+        /// </summary>
+        /// <returns>200: Lista de filmes. 400</returns>
+        [HttpGet("Descricao")]
+        public ActionResult<List<FilmeDtoConsulta>> ObterTodosPorDescricao() =>
+            Ok(ConvertModelDescricao(_filmeService.ObterTodos()));
+
         /// <summary>-
         /// Consulta de filme por ID.
         /// </summary>
@@ -94,6 +102,21 @@ namespace Locadora_filmes_web.Controllers
                     Titulo = item.Titulo,
                     Lancamento = item.Lancamento,
                     ClassificacaoIndicada = item.ClassificacaoIndicada,
+                });
+            }
+
+            return filmesDto;
+        }
+
+        private List<DescricaoDto> ConvertModelDescricao(List<Filme> filmes)
+        {
+            var filmesDto = new List<DescricaoDto>();
+            foreach (var item in filmes)
+            {
+                filmesDto.Add(new DescricaoDto()
+                {
+                    Key = item.Id,
+                    Descricao = item.Titulo,
                 });
             }
 

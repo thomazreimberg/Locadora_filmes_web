@@ -56,8 +56,8 @@ namespace Locadora_filmes_web.Controllers
                 {
                     Id_Cliente = locacao.Id_Cliente,
                     Id_Filme = locacao.Id_Filme,
-                    DataDevolucao = locacao.DataDevolucao,
-                    DataLocacao = locacao.DataLocacao
+                    DataDevolucao = locacao.DataDevolucao?.Date,
+                    DataLocacao = locacao.DataLocacao?.Date
                 })
             });
 

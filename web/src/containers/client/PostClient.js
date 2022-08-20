@@ -22,7 +22,7 @@ export default function PostClient() {
 
     const handleChange = (date, dateString) => {
         setDataNascimento(date);
-      };
+    };
 
     async function handleNewClient(e){
         e.preventDefault();

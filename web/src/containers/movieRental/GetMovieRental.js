@@ -6,7 +6,7 @@ import './styles.css'
 import api from '../../services/api';
 
 const { Column } = Table;
-export default function GetMovie() {
+export default function GetMovieRental({addFunc}) {
   const [rentalMovies, setRentalMovies] = useState([]);
   const fetchData = async () => {
     try {
@@ -22,7 +22,7 @@ export default function GetMovie() {
 
   return (
     <div>
-      <Button className='get-movie-rental-button' type="primary">Alugar um filme</Button>
+      <Button onClick={(e)=> addFunc("postMovieRental", "child")} className='get-movie-rental-button' type="primary">Alugar filme</Button>
 
       <Table dataSource={rentalMovies}>
         <Column title="Id locação" dataIndex="key" key="key" />

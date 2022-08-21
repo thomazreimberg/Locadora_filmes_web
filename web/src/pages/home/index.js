@@ -14,6 +14,7 @@ import GetMovieRental from '../../containers/movieRental/GetMovieRental'
 import PostClient from '../../containers/client/PostClient';
 import PostMovie from '../../containers/movie/PostMovie';
 import PostMovieRental from '../../containers/movieRental/PostMovieRental';
+import PutClient from '../../containers/client/PutClient';
 
 const { Header, Content, Sider } = Layout;
 
@@ -43,14 +44,19 @@ export default function App() {
     postClient: false,
     postMovie: false,
     postMovieRental: false,
+    updateClient: false,
+    updateMovie: false,
+    updateMovieRental: false,
   }
-  const [menuControl, setmenuControl] = useState(initial)
+  const [menuControl, setMenuControl] = useState(initial)
+  const [keyVal, setKeyVal] = useState("")
 
-  const handleControl = (val, option) => {
+  const handleControl = (val, option, keyVal) => {
     if(option === "parent"){
-      setmenuControl({ ...initial, [val.key]: !initial[val.key] });
+      setMenuControl({ ...initial, [val.key]: !initial[val.key] });
     } else {
-      setmenuControl({ ...initial, [val]: !initial[val] });
+      setMenuControl({ ...initial, [val]: !initial[val] });
+      setKeyVal(keyVal);
     }
   }
 
@@ -81,18 +87,20 @@ export default function App() {
           <div className="site-layout-background">
             {
               menuControl.client ?
-                <GetClient  addFunc={handleControl} /> :
+                <GetClient addFunc={handleControl} /> :
                   menuControl.postClient ?
                     <PostClient /> :
-                      menuControl.movieRental ?
-                        <GetMovieRental addFunc={handleControl} /> : 
-                          menuControl.postMovieRental ?
-                            <PostMovieRental /> : 
-                              menuControl.movie ?
-                                <GetMovie addFunc={handleControl} />:
-                                  menuControl.postMovie ?
-                                    <PostMovie />:
-                                      <p>Home</p>
+                      menuControl.updateClient ?
+                        <PutClient handleKey={keyVal} /> :
+                          menuControl.movieRental ?
+                            <GetMovieRental addFunc={handleControl} /> : 
+                              menuControl.postMovieRental ?
+                                <PostMovieRental /> : 
+                                  menuControl.movie ?
+                                    <GetMovie addFunc={handleControl} />:
+                                      menuControl.postMovie ?
+                                        <PostMovie />:
+                                          <p>Home</p>
               }
           </div>
         </Content>

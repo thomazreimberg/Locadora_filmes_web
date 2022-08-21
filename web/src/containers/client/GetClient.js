@@ -46,7 +46,7 @@ export default function GetClient({addFunc}) {
           dataIndex="key"
           render={(e, record) => (
             <Space size="middle">
-              <Button onClick={()=> console.log(record.key)}>Alterar</Button>
+              <Button onClick={()=> addFunc("updateClient", "child", record.key)}>Alterar</Button>
               <Button onClick={()=> DeleteClient(record.key)}>Excluir</Button>
             </Space>
           )}

@@ -39,7 +39,6 @@ export default function PutClient(handleKeyObj) {
 
             <PopUpSucess title="Cliente" description="Cliente atualizado com sucesso!"/>
            
-            history.push('/');
             window.location.reload(false);
         } catch(err){
             console.log('Erro ao atualizar as informações do cliente, tente novamente.');

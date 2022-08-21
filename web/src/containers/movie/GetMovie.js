@@ -43,9 +43,9 @@ export default function GetMovie({addFunc}) {
         <Column
           title="Action"
           key="action"
-          render={(e, record) => (
+          render={(_, record) => (
             <Space size="middle">
-              <Button onClick={()=> console.log(record.key)}>Alterar</Button>
+              <Button onClick={()=> addFunc("updateMovie", "child", record.key)}>Alterar</Button>
               <Button onClick={()=> DeleteMovie(record.key)}>Excluir</Button>
             </Space>
           )}

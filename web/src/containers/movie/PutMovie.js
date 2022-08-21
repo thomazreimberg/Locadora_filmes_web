@@ -1,61 +1,56 @@
 import {
-    DatePicker,
     Form,
     Input,
     Button,
+    InputNumber,
+    Checkbox
 } from 'antd';
 
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import './styles.css'
 import api from '../../services/api';
-import moment from "moment";
 
 import PopUpSucess from '../popup/PopUpSucess';
 
-export default function PutClient(handleKeyObj) {
-    const [nome, setNome] = useState();
-    const [cpf, setCpf] = useState();
-    const [dataNascimento, setDataNascimento] = useState();
-
-    const history = useHistory();
-
-    const handleChange = (date, dateString) => {
-        setDataNascimento(date);
-      };
+export default function PutMovie(handleKeyObj) {
+    const [titulo, setTitulo] = useState("");
+    const [classificacaoIndicada, setClassificacaoIndicada] = useState(1);
+    const [lancamento, setLancamento] = useState(false);
 
     async function handleNewClient(e){
         e.preventDefault();
 
         const data = {
-            nome,
-            cpf,
-            dataNascimento,
+            titulo,
+            classificacaoIndicada,
+            lancamento,
         };
 
         try {
-            await api.put('api/Cliente/' + handleKeyObj.handleKey, data);
+            await api.put('api/Filme/'+ handleKeyObj.handleKey, data);
 
-            <PopUpSucess title="Cliente" description="Cliente atualizado com sucesso!"/>
-           
-            history.push('/');
+            <PopUpSucess title="Filme" description="Filme atualizado com sucesso!"/>
+
             window.location.reload(false);
         } catch(err){
-            console.log('Erro ao atualizar as informações do cliente, tente novamente.');
+            console.log('Erro ao atualizar um filme, tente novamente.');
         }
     }
 
     const fetchData = async () => {
         try {
-            const res = await api.get('api/Cliente/' + handleKeyObj.handleKey);
+            const res = await api.get('api/Filme/' + handleKeyObj.handleKey);
             
-            setNome(res.data.nome);
-            setCpf(res.data.cpf);
+            setTitulo(res.data.titulo);
+            setClassificacaoIndicada(res.data.classificacaoIndicada);
+            setLancamento(res.data.lancamento);
+            console.log(res.data.lancamento);
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
     }
+    
     useEffect(() => {
         fetchData();
     },[]);
@@ -75,18 +70,18 @@ export default function PutClient(handleKeyObj) {
             }}
         >
             <Form.Item label="Nome">
-                <Input  style={{ width: 450}} maxLength={200} value={nome} onChange={e => setNome(e.target.value)}/>
+                <Input  style={{ width: 450}} maxLength={200} value={titulo} onChange={e => setTitulo(e.target.value)}/>
             </Form.Item>
 
-            <Form.Item label="Data de nascimento">
-                <DatePicker defaultValue={moment()} value={dataNascimento} onChange={handleChange} format={'DD/MM/YYYY'}/>
+            <Form.Item label="Classificação indicada">
+                <InputNumber defaultValue={1} min={1} max={18} value={classificacaoIndicada} onChange={e => setClassificacaoIndicada(e)}/>
+            </Form.Item>
+            
+            <Form.Item label="Lançamento">
+                <Checkbox checked={lancamento} style={{ width: 150}} onClick={e => setLancamento(e.target.checked)}/>
             </Form.Item>
 
-            <Form.Item label="CPF">
-                <Input style={{ width: 150}} maxLength={11} value={cpf} onChange={e => setCpf(e.target.value)}/>
-            </Form.Item>
-
-            <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-client' type="primary" >Atualizar</Button>
+            <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-movie' type="primary" >Atualizar</Button>
         </Form>
     );
 };

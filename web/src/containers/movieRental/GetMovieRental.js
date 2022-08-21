@@ -5,6 +5,7 @@ import './styles.css'
 
 import api from '../../services/api';
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 async function DeleteMovieRental(key){
   try {
@@ -13,7 +14,7 @@ async function DeleteMovieRental(key){
 
       window.location.reload(false);
   } catch(err){
-      console.log('Erro ao deletar uma locação, tente novamente.');
+    <PopUpError title="Cliente" description='Erro ao deletar uma locação, tente novamente.'/>
   }
 }
 
@@ -25,7 +26,7 @@ export default function GetMovieRental({addFunc}) {
       const res = await api.get('api/Locacao');
       setRentalMovies(res.data);
     } catch (err) {
-      console.log(err);
+      <PopUpError title="Cliente" description={err}/>
     }
   }
   useEffect(() => {

@@ -12,6 +12,7 @@ import './styles.css'
 import api from '../../services/api';
 
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 export default function PostMovie() {
     const [titulo, setTitulo] = useState("");
@@ -34,7 +35,7 @@ export default function PostMovie() {
 
             window.location.reload(false);
         } catch(err){
-            console.log('Erro ao cadastrar um filme, tente novamente.');
+            <PopUpError title="Cliente" description="Erro ao cadastrar um filme, tente novamente."/>
         }
     }
 

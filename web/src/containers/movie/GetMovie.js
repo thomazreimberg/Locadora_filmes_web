@@ -5,6 +5,7 @@ import './styles.css'
 
 import api from '../../services/api';
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 async function DeleteMovie(key){
   try {
@@ -13,7 +14,7 @@ async function DeleteMovie(key){
 
       window.location.reload(false);
   } catch(err){
-      console.log('Erro ao deletar um cliente, tente novamente.');
+    <PopUpError title="Cliente" description="Erro ao deletar um filme, tente novamente."/>
   }
 }
 
@@ -25,7 +26,7 @@ export default function GetMovie({addFunc}) {
       const res = await api.get('api/Filme');
       setMovies(res.data);
     } catch (err) {
-      console.log(err);
+      <PopUpError title="Filme" description={err} />
     }
   }
   useEffect(() => {

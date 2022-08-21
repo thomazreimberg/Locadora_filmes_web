@@ -12,6 +12,7 @@ import './styles.css'
 import api from '../../services/api';
 
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 export default function PostClient() {
     const [nome, setNome] = useState();
@@ -43,7 +44,7 @@ export default function PostClient() {
             history.push('/');
             window.location.reload(false);
         } catch(err){
-            console.log('Erro ao cadastrar um cliente, tente novamente.');
+            <PopUpError title="Cliente" description="Erro ao cadastrar um cliente, tente novamente."/>
         }
     }
 

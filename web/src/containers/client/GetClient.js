@@ -4,6 +4,7 @@ import './styles.css'
 
 import api from '../../services/api';
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 async function DeleteClient(key){
   try {
@@ -12,7 +13,7 @@ async function DeleteClient(key){
 
       window.location.reload(false);
   } catch(err){
-      console.log('Erro ao deletar um cliente, tente novamente.');
+      <PopUpError title="Cliente" description='Erro ao deletar um cliente, tente novamente.'/>
   }
 }
 
@@ -25,7 +26,7 @@ export default function GetClient({addFunc}) {
       const res = await api.get('api/Cliente');
       setClients(res.data);
     } catch (err) {
-      console.log(err);
+      <PopUpError title="Cliente" description={err}/>
     }
   }
   useEffect(() => {

@@ -12,6 +12,7 @@ import './styles.css'
 import api from '../../services/api';
 
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 const { Option } = Select;
 
@@ -35,7 +36,7 @@ export default function PostMovieRental() {
         const res = await api.get('api/Cliente/Descricao');
         setClients(res.data);
         } catch (err) {
-        console.log(err);
+            <PopUpError title="Locação" description={err}/>
         }
     }
 
@@ -45,7 +46,7 @@ export default function PostMovieRental() {
         const res = await api.get('api/Filme/Descricao');
         setMovies(res.data);
         } catch (err) {
-        console.log(err);
+            <PopUpError title="Locação" description={err}/>
         }
     }
     
@@ -71,7 +72,7 @@ export default function PostMovieRental() {
 
             window.location.reload(false);
         } catch(err){
-            console.log('Erro ao alugar um filme, tente novamente.');
+            <PopUpError title="Locação" description='Erro ao alugar um filme, tente novamente.'/>
         }
     }
 

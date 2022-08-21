@@ -12,6 +12,7 @@ import './styles.css'
 import api from '../../services/api';
 
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 export default function PutMovie(handleKeyObj) {
     const [titulo, setTitulo] = useState("");
@@ -34,7 +35,7 @@ export default function PutMovie(handleKeyObj) {
 
             window.location.reload(false);
         } catch(err){
-            console.log('Erro ao atualizar um filme, tente novamente.');
+            <PopUpError title="Cliente" description="Erro ao atualizar um filme, tente novamente."/>
         }
     }
 
@@ -47,7 +48,7 @@ export default function PutMovie(handleKeyObj) {
             setLancamento(res.data.lancamento);
             console.log(res.data.lancamento);
         } catch (err) {
-            console.log(err);
+            <PopUpError title="Cliente" description={err}/>
         }
     }
     

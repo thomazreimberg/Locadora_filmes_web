@@ -6,20 +6,18 @@ import {
 } from 'antd';
 
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import './styles.css'
 import api from '../../services/api';
 import moment from "moment";
 
 import PopUpSucess from '../popup/PopUpSucess';
+import PopUpError from '../popup/PopUpError';
 
 export default function PutClient(handleKeyObj) {
     const [nome, setNome] = useState();
     const [cpf, setCpf] = useState();
     const [dataNascimento, setDataNascimento] = useState();
-
-    const history = useHistory();
 
     const handleChange = (date, dateString) => {
         setDataNascimento(date);
@@ -41,7 +39,7 @@ export default function PutClient(handleKeyObj) {
            
             window.location.reload(false);
         } catch(err){
-            console.log('Erro ao atualizar as informações do cliente, tente novamente.');
+            <PopUpError title="Cliente" description="Erro ao cadastrar um cliente, tente novamente."/>
         }
     }
 
@@ -52,7 +50,7 @@ export default function PutClient(handleKeyObj) {
             setNome(res.data.nome);
             setCpf(res.data.cpf);
         } catch (err) {
-        console.log(err);
+            <PopUpError title="Cliente" description={err} />
         }
     }
     useEffect(() => {

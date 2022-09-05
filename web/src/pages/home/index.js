@@ -16,6 +16,7 @@ import PostMovie from '../../containers/movie/PostMovie';
 import PostMovieRental from '../../containers/movieRental/PostMovieRental';
 import PutClient from '../../containers/client/PutClient';
 import PutMovie from '../../containers/movie/PutMovie';
+import PutMovieRental from '../../containers/movieRental/PutMovieRental'
 
 const { Header, Content, Sider } = Layout;
 
@@ -96,14 +97,16 @@ export default function App() {
                           menuControl.movieRental ?
                             <GetMovieRental addFunc={handleControl} /> : 
                               menuControl.postMovieRental ?
-                                <PostMovieRental /> : 
-                                  menuControl.movie ?
-                                    <GetMovie addFunc={handleControl} />:
-                                      menuControl.postMovie ?
-                                        <PostMovie />:
-                                          menuControl.updateMovie ?
-                                            <PutMovie handleKey={keyVal} /> :
-                                              <p>Home</p>
+                                <PostMovieRental /> :
+                                  menuControl.updateMovieRental ?
+                                    <PutMovieRental handleKey={keyVal} /> :
+                                      menuControl.movie ?
+                                        <GetMovie addFunc={handleControl} />:
+                                          menuControl.postMovie ?
+                                            <PostMovie />:
+                                              menuControl.updateMovie ?
+                                                <PutMovie handleKey={keyVal} /> :
+                                                  <p>Home</p>
               }
           </div>
         </Content>

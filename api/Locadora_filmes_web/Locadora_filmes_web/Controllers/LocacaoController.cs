@@ -1,6 +1,7 @@
 ﻿using Locadora_filmes_web.Data.Entity;
 using Locadora_filmes_web.Dtos;
 using Locadora_filmes_web.Dtos.Locacao;
+using Locadora_filmes_web.Service.Models;
 using Locadora_filmes_web.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Locadora_filmes_web.Controllers
             _clienteService = new ClienteService();
         }
 
+        #region GET
         /// <summary>
         /// Listagem de locações.
         /// </summary>
@@ -41,6 +43,32 @@ namespace Locadora_filmes_web.Controllers
         [HttpGet("{id}")]
         public ActionResult<LocacaoDtoConsulta> ObterPorId(int id) =>
             Ok(_locacaoService.ObterPorId(id));
+
+        /// <summary>
+        /// Retorna o segundo cliente que mais alugou filmes.
+        /// </summary>
+        /// <returns>200: Cliente. 400</returns>
+        [HttpGet("ClienteComprador")]
+        public ActionResult<ClienteLocacoes> ObterClienteComprador() =>
+            Ok(_locacaoService.ObterClienteComprador());
+
+        /// <summary>
+        /// Lista de cliente que ainda não fizeram a devolução do filme alugado.
+        /// </summary>
+        /// <returns>200: Lista de clientes. 400</returns>
+        [HttpGet("ClientePendenciaDevolucao")]
+        public ActionResult<List<Cliente>> ObterClienteAtrasoDevolucao() =>
+            Ok(_locacaoService.ObterClientesAtrasoDevolucao());
+
+        /// <summary>
+        /// Lista de filmes que nunca foram alugados.
+        /// </summary>
+        /// <returns>200: Lista de filmes. 400</returns>
+        [HttpGet("FilmeNaoAlugados")]
+        public ActionResult<List<Filme>> ObterFilmesNaoAlugados() =>
+            Ok(_locacaoService.ObterFilmesNaoAlugados());
+        #endregion
+
 
         /// <summary>
         /// Cadastro de locação.

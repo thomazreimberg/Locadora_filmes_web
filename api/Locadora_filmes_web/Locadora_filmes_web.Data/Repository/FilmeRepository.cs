@@ -50,7 +50,7 @@ namespace Locadora_filmes_web.Data.Repository
             return cliente;
         }
 
-        public List<Filme> ObterTodos() =>
-            _dbContextClient.Filme.ToList();
+        public IQueryable<Filme> ObterTodos() =>
+            _dbContextClient.Filme;
     }
 }

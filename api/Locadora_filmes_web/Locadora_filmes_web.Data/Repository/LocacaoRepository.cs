@@ -1,6 +1,5 @@
 ﻿using Locadora_filmes_web.Data.Entity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Locadora_filmes_web.Data.Repository
@@ -50,7 +49,7 @@ namespace Locadora_filmes_web.Data.Repository
             return locacao;
         }
 
-        public List<Locacao> ObterTodos() =>
-            _dbContextClient.Locacao.ToList();
+        public IQueryable<Locacao> ObterTodos() =>
+            _dbContextClient.Locacao;
     }
 }

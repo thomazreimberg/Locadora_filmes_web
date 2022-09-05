@@ -23,7 +23,7 @@ export default function PutClient(handleKeyObj) {
         setDataNascimento(date);
       };
 
-    async function handleNewClient(e){
+    async function handlePutClient(e){
         e.preventDefault();
 
         const data = {
@@ -83,7 +83,7 @@ export default function PutClient(handleKeyObj) {
                 <Input style={{ width: 150}} maxLength={11} value={cpf} onChange={e => setCpf(e.target.value)}/>
             </Form.Item>
 
-            <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-client' type="primary" >Atualizar</Button>
+            <Button style={{ width: 200, }} onClick={handlePutClient} className='btn-post-client' type="primary" >Atualizar</Button>
         </Form>
     );
 };

@@ -48,9 +48,9 @@ export default function GetMovieRental({addFunc}) {
         <Column
           title="Action"
           key="action"
-          render={(e, record) => (
+          render={(_, record) => (
             <Space size="middle">
-              <Button onClick={()=> console.log(record.key)}>Alterar</Button>
+              <Button onClick={()=> addFunc("updateMovieRental", "child", record.key)} >Alterar</Button>
               <Button onClick={()=> DeleteMovieRental(record.key)}>Excluir</Button>
             </Space>
           )}

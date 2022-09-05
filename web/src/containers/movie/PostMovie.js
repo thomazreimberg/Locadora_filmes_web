@@ -19,7 +19,7 @@ export default function PostMovie() {
     const [classificacaoIndicada, setClassificacaoIndicada] = useState(1);
     const [lancamento, setLancamento] = useState(false);
 
-    async function handleNewClient(e){
+    async function handleNewMovie(e){
         e.preventDefault();
 
         const data = {
@@ -65,7 +65,7 @@ export default function PostMovie() {
                 <Checkbox style={{ width: 150}} onClick={e => setLancamento(e.target.checked)}/>
             </Form.Item>
 
-            <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-movie' type="primary" >Enviar</Button>
+            <Button style={{ width: 200, }} onClick={handleNewMovie} className='btn-post-movie' type="primary" >Enviar</Button>
         </Form>
     );
 };

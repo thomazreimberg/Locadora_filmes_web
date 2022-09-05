@@ -1,7 +1,10 @@
 ﻿using Locadora_filmes_web.Data.Entity;
 using Locadora_filmes_web.Data.Repository;
+using Locadora_filmes_web.Service.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Locadora_filmes_web.Service.Services
 {
@@ -21,7 +24,7 @@ namespace Locadora_filmes_web.Service.Services
         public void Alterar(int id, Locacao entidade)
         {
             ValidarDados(entidade);
-            
+
             _locacaoRepository.Alterar(id, entidade);
         }
 
@@ -39,10 +42,50 @@ namespace Locadora_filmes_web.Service.Services
         }
 
         public List<Locacao> ObterTodos() =>
-            _locacaoRepository.ObterTodos();
+            _locacaoRepository.ObterTodos().ToList();
 
         public Locacao ObterPorId(int id) =>
             _locacaoRepository.ObterPorId(id);
+
+        public Cliente ObterClienteComprador()
+        {
+            var locacoes = _locacaoRepository.ObterTodos()
+                .GroupBy(x => x.Id_Cliente)
+                .Select(x => new ClienteLocacoes()
+                {
+                    IdCliente = x.Key,
+                    Quantidade = x.Count()
+                })
+                .ToList();
+
+            return locacoes.Count() > 1 ? _clienteRepository.ObterPorId(locacoes[1].IdCliente) : _clienteRepository.ObterPorId(locacoes[0].IdCliente);
+        }
+
+        public List<Cliente> ObterClientesAtrasoDevolucao() =>
+            _locacaoRepository.ObterTodos()
+                .Include(x => x.Cliente)
+                .Where(x => x.DataDevolucao == null && x.DataLocacao.Value.Date < (DateTime.Now.Date.AddDays(-3)))
+                .Select(x => new Cliente()
+                {
+                    Id = x.Id_Cliente,
+                    Nome = x.Cliente.Nome,
+                    Cpf = x.Cliente.Cpf,
+                    DataNascimento = x.Cliente.DataNascimento
+                })
+                .ToList();
+
+        public List<Filme> ObterFilmesNaoAlugados()
+        {
+            var filmesAlugados = _locacaoRepository.ObterTodos()
+                .GroupBy(x => x.Id_Filme)
+                .Select(x => x.Key)
+                .ToList();
+
+            return _filmeRepository.ObterTodos()
+                .Where(x => !filmesAlugados.Contains(x.Id))
+                .ToList();
+        }
+            
 
         private void ValidarDados(Locacao entidade)
         {

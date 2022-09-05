@@ -2,6 +2,7 @@
 using Locadora_filmes_web.Data.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Locadora_filmes_web.Service.Services
 {
@@ -31,7 +32,7 @@ namespace Locadora_filmes_web.Service.Services
         }
 
         public List<Filme> ObterTodos() =>
-            _filmeRepository.ObterTodos();
+            _filmeRepository.ObterTodos().ToList();
 
         public Filme ObterPorId(int id) =>
             _filmeRepository.ObterPorId(id);

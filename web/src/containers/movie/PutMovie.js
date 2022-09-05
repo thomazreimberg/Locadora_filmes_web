@@ -19,7 +19,7 @@ export default function PutMovie(handleKeyObj) {
     const [classificacaoIndicada, setClassificacaoIndicada] = useState(1);
     const [lancamento, setLancamento] = useState(false);
 
-    async function handleNewClient(e){
+    async function handlePutMovie(e){
         e.preventDefault();
 
         const data = {
@@ -82,7 +82,7 @@ export default function PutMovie(handleKeyObj) {
                 <Checkbox checked={lancamento} style={{ width: 150}} onClick={e => setLancamento(e.target.checked)}/>
             </Form.Item>
 
-            <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-movie' type="primary" >Atualizar</Button>
+            <Button style={{ width: 200, }} onClick={handlePutMovie} className='btn-post-movie' type="primary" >Atualizar</Button>
         </Form>
     );
 };

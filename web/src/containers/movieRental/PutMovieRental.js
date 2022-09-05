@@ -15,7 +15,19 @@ import PopUpError from '../popup/PopUpError';
 
 const { Option } = Select;
 
-export default function PostMovieRental() {
+export default function PutMovieRental(handleKeyObj) {
+    const fetchData = async () => {
+        try {
+            const res = await api.get('api/Locacao/' + handleKeyObj.handleKey);
+            
+            setId_Cliente(res.data.id_Cliente);
+            setId_Filme(res.data.id_Filme);
+            
+        } catch (err) {
+            <PopUpError title="Locação" description={err}/>
+        }
+    }
+    
     const [id_Cliente, setId_Cliente] = useState();
     const [id_Filme, setId_Filme] = useState();
     const [dataLocacao, setDataLocacao] = useState();
@@ -30,7 +42,7 @@ export default function PostMovieRental() {
     };
 
     const [clients, setClients] = useState([]);
-    const fetchData = async () => {
+    const fetchDataClient = async () => {
         try {
         const res = await api.get('api/Cliente/Descricao');
         setClients(res.data);
@@ -52,9 +64,10 @@ export default function PostMovieRental() {
     useEffect(() => {
         fetchData();
         fetchDataMovie();
+        fetchDataClient();
     },[]);
 
-    async function handleNewClient(e){
+    async function handlePutMovieRental(e){
         e.preventDefault();
 
         const data = {
@@ -113,7 +126,7 @@ export default function PostMovieRental() {
                 <DatePicker name={dataDevolucao} value={dataDevolucao} onChange={handleChangeDevolucao} format={'DD/MM/YYYY'}/>
             </Form.Item>
 
-            <Button style={{ width: 200, }} onClick={handleNewClient} className='btn-post-movie' type="primary">Enviar</Button>
+            <Button style={{ width: 200, }} onClick={handlePutMovieRental} className='btn-post-movie' type="primary">Enviar</Button>
         </Form>
     );
 };

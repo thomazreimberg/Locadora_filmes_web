@@ -35,6 +35,24 @@
 	
 ### React:
 - https://ant.design/docs/react/getting-started
+
+Problemas:
+--> Failed to parse source map: 'webpack://antd/./components/time-picker/style/index.less' URL is not supported
+	-> import 'antd/dist/antd.min.css
+--> No 'Access-Control-Allow-Origin' header is present on the requested resource. (CORS): https://enable-cors.org/server_aspnet.html
+-> https://cursos.alura.com.br/forum/topico-consumo-de-api-rest-com-javascript-78468
+-> https://stackoverflow.com/questions/45975135/access-control-origin-header-error-using-axios
+REFERENCIAS: 
+https://stackoverflow.com/questions/71079070/react-js-updating-state-with-antd-datepicker-value
+https://ant.design/components
+https://codesandbox.io/s/stupefied-lehmann-byf96?file=/src/App.tsx
+https://stackoverflow.com/questions/63648619/antd-how-to-get-the-entire-row-value-in-a-specific-cell-click
+https://stackoverflow.com/questions/63503113/defaultvalue-of-showtime-attribute-in-antd-datepicker-couldnt-set-the-time
+
+Passos front:
+	cd na pasta web do projeto:
+	npm i
+	
 	
 ### READ.ME:
 - https://raullesteves.medium.com/github-como-fazer-um-readme-md-bonit%C3%A3o-c85c8f154f8

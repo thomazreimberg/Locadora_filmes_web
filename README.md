@@ -56,3 +56,23 @@ Passos front:
 	
 ### READ.ME:
 - https://raullesteves.medium.com/github-como-fazer-um-readme-md-bonit%C3%A3o-c85c8f154f8
+
+Pontos a melhorar backend:
+	Token de autorização (proteger a API).
+	Criar nova camada de aplication para mapeamento dos dados das tabelas para os DTO's (necessário também a camada de cross cutting/IOC para centralizar os mappers).
+	Implementar migration.
+	Melhoria no dbcontext para não deixar dados fixos.
+	Implementação de campos padrões (inativo, dh_inclusao/alteracao e usuario criador).
+	Implementação de filtros de paginação (offset).
+	Colocar injeção de dependencia para .
+	Parar de fazer o ToList no Repository e usar o IQueryable com interfaces das tabelas (e poder fazer a incrementação de filtros na camada de services)
+	Interfaces para os repositorys e interface base para todos os services.
+	Rotina de tratamento de erros gerados pela api (ArgumentException).
+	Validar CPF criando classe de extensão de string.
+
+Pontos a melhorar frontend:
+	Arrumar a exibição das datas
+	Arrumar problema de não exibir a informação de lançamento
+	Arrumar caracteres estranhos "dragÃ£o"
+	Alterar os containers de POST para serem reutilizaveis nas rotas de PUT.
+		Arrumar problema com a data de nascimento no PUT de cliente
